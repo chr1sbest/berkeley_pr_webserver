@@ -44,3 +44,21 @@ var RankingView = Backbone.View.extend({
     return this;
   }
 });
+
+
+// View for About us.
+var AboutView = Backbone.View.extend({
+  el: '#container',
+
+  initialize: function(){
+    this.render()
+  },
+
+  render: function(){
+    var AboutPointer = this;
+    $.get('static/templates/about.html', function(about){
+      AboutPointer.$el.html(about);
+    });
+    return this;
+  }
+});
