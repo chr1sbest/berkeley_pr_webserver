@@ -23,7 +23,6 @@ var RankingView = Backbone.View.extend({
   el: '#container',
 
   initialize: function(){
-    this.$el.html('<p>Loading..</p>');
   },
 
   render: function(){
