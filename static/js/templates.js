@@ -7,3 +7,5 @@ Handlebars.registerHelper('list', function(items, options) {
   return out + "</ul>";
 });
 
+// Example bullshit template
+var testTemplate = "{{#list data}}{{player}} {{rank}} {{rating}}{{/list}}";
