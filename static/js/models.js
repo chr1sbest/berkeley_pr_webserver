@@ -1,4 +1,3 @@
-var Rankings = Backbone.Collection.extend({
+var Rankings = Backbone.Model.extend({
   url: '/rankings',
-  model: Backbone.Model
 });

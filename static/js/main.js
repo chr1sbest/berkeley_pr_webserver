@@ -1,13 +1,16 @@
 // Initialize Navbar
 var navView = new NavView();
 
-// Fetch current rankings and build AppView upon success
+// Initialize rankingView and currentRanks model
 var currentRanks = new Rankings();
+var rankingView = new RankingView({model: currentRanks});
+
+// Fetch ranking data and update views accordingly
 currentRanks.fetch({
   success: function() {
-    var appView = new RankingView({model: currentRanks.models[0]});
+    rankingView.render()
   },
   error: function() {
-    console.log("Failed to retrieve json from API");
+    rankingView.renderFailure()
   }
 });

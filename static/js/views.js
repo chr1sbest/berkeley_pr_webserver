@@ -1,3 +1,4 @@
+// View for top Navbar.
 var NavView = Backbone.View.extend({
   el: '#nav',
 
@@ -7,38 +8,39 @@ var NavView = Backbone.View.extend({
 
   render: function(){
     var NavPointer = this;
-    //  get navHTML from our templates/navbar.html!
-    $.get('static/templates/navbar.hb', function(navbarHb){
-      // Assign html for this element to the navbar.hb template
-      NavPointer.$el.html(navbarHb);
+    $.get('static/templates/navbar.html', function(navbarTemplate){
+      // get navbar html from our templates/navbar.html
+      // Assign html for this element to the navbar.html template
+      NavPointer.$el.html(navbarTemplate);
     });
+    return this;
   },
 });
 
 
+// View for Rankings.
 var RankingView = Backbone.View.extend({
-  // el - stands for element. Every view has a element associate in with HTML
-  //      content will be rendered
   el: '#container',
 
-  // Function called when this view is instantiated
   initialize: function(){
-    this.render();
+    this.$el.html('<p>Loading..</p>');
   },
 
-  // Render our template to show new data
   render: function(){
-
     var RankingPointer = this;
-
-    $.get('static/templates/rankings.hb', function(rankingsTemplate){
-      // Compile handlebar template with the .hb template
+    $.get('static/templates/rankings.html', function(rankingsTemplate){
+      // Compile handlebar template with the rankings.html template
       var template = Handlebars.compile(rankingsTemplate);
       // Pass our data to the template
       var compiledHtml = template(RankingPointer.model.attributes);
       // Set element to newly compiled template
       RankingPointer.$el.html(compiledHtml);
     });
-
+    return this;
   },
+
+  renderFailure: function(){
+    this.$el.html('<p>Failed to retrieve data from API.</p>');
+    return this;
+  }
 });
