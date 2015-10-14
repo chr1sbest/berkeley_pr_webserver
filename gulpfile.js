@@ -18,7 +18,6 @@ gulp.task('default', ['runserver'], function () {
     proxy: "127.0.0.1:5000"
   });
  
-  gulp.watch(['templates/*.*'], reload);
-  gulp.watch(['static/*.*'], reload);
+  gulp.watch(['templates/*.*', 'static/*/*.*'], reload);
 
 });

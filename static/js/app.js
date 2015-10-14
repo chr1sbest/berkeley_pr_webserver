@@ -3,7 +3,6 @@ var Rankings = Backbone.Collection.extend({
   model: Backbone.Model
 });
 
-
 var AppView = Backbone.View.extend({
   // el - stands for element. Every view has a element associate in with HTML
   //      content will be rendered.
@@ -15,8 +14,7 @@ var AppView = Backbone.View.extend({
   // $el - it's a cached jQuery object (el), in which you can use jQuery functions
   //       to push content. Like the Hello World in this case.
   render: function(){
-    var templateString = "<p>You can find me in {{player}}. My address is {{rank}} {{rating}}.</p>";
-    var newTemplateString = "{{#list data}}{{player}} {{rank}} {{rating}}{{/list}}";
+    var newTemplateString = "{{#list data}}{{rank}}. {{player}} ({{rating}}){{/list}}";
     var template = Handlebars.compile(newTemplateString);
 
    // Pass our data to the template
