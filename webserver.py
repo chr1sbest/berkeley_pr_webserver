@@ -1,6 +1,8 @@
 import json
 from flask import Flask, jsonify, render_template
-application = Flask(__name__)
+application = Flask(__name__,
+                    template_folder='frontend',
+                    static_folder='frontend')
 
 @application.route("/")
 def hello():

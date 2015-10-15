@@ -8,7 +8,7 @@ var NavView = Backbone.View.extend({
 
   render: function(){
     var NavPointer = this;
-    $.get('static/templates/navbar.html', function(navbarTemplate){
+    $.get('frontend/templates/navbar.html', function(navbarTemplate){
       // get navbar html from our templates/navbar.html
       // Assign html for this element to the navbar.html template
       NavPointer.$el.html(navbarTemplate);
@@ -27,7 +27,7 @@ var RankingView = Backbone.View.extend({
 
   render: function(){
     var RankingPointer = this;
-    $.get('static/templates/rankings.html', function(rankingsTemplate){
+    $.get('frontend/templates/rankings.html', function(rankingsTemplate){
       // Compile handlebar template with the rankings.html template
       var template = Handlebars.compile(rankingsTemplate);
       // Pass our data to the template
