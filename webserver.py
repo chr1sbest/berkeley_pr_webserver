@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, jsonify, render_template
+from flask import Flask, Response, jsonify, render_template
 
 # Initialize flask application
 application = Flask(__name__,
@@ -19,7 +19,8 @@ def rankings():
     path = os.path.join(CURRENT_DIR, 'mock_data/ranking_mock.json')
     with open(path, 'r') as data:
         ranking_data = json.load(data)
-    return jsonify(**ranking_data)
+    return Response(json.dumps(ranking_data),
+                    mimetype='application/json')
 
 @application.route("/players/<player_id>")
 def player(player_id):
