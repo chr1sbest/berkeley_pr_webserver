@@ -14,12 +14,15 @@ Application server for Berkeley PR project.
 Setup
 =======
 
-Make sure you have pip, node, and npm installed, then cd into the root directory of this project and run:
-
+To run the webserver on its own, cd into the root directory of this project and run:
 ```
 pip install -r requirements.txt
-npm install
+python webserver.py
 ```
 
-To run the application with Browsersync
-run `gulp`
+To run the application with Browsersync for live code reload, run:
+```
+cd frontend
+npm install
+gulp
+```
