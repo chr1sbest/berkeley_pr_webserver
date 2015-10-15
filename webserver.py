@@ -1,20 +1,20 @@
 import json
 from flask import Flask, jsonify, render_template
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route("/")
+@application.route("/")
 def hello():
     return render_template('index.html')
 
 
-@app.route("/rankings")
+@application.route("/rankings")
 def rankings():
     with open('mock_data/ranking_mock.json', 'r') as data:
         ranking_data = json.load(data)
     return jsonify(**ranking_data)
 
 
-@app.route("/players/<player_id>")
+@application.route("/players/<player_id>")
 def player(player_id):
     player_file = "mock_data/player_{}_mock.json".format(player_id)
     with open(player_file, 'r') as data:
@@ -23,4 +23,4 @@ def player(player_id):
 
 
 if __name__ == "__main__":
-    app.run()
+    application.run()
