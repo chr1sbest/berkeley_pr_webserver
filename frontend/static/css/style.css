@@ -1,0 +1,27 @@
+ul {
+	padding-top: 2em;
+	background-color: green;
+	white-space:nowrap;
+}
+.panel-body {
+	background-color: blue;
+}
+li{
+	display: inline;
+	padding: 1em 1em;
+	margin: .5em 0em;
+}
+.rank {
+	background-color: red;
+}
+.rating {
+	background-color: white;
+	position-right: 0;
+}
+.name {
+	background-color: yellow;
+}
+
+body {
+    background-color: red;
+}
