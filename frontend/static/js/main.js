@@ -1,18 +1,24 @@
 // Initialize Navbar
 var navView = new NavView();
+var loginView = new LoginView()
 
 FB.init({appId: '1705522486327956'})
 
 // Build application router
 var AppRouter = Backbone.Router.extend({
   routes: {
-    "": "rankings", // Default route
+    "": "home", // Default route
     "rankings": "rankings",
     "matches": "matches",
     "tournaments": "tournaments",
     "about": "about",
     "login": "login",
+    "logout": "logout",
     "players/:id": "player",
+  },
+
+  home: function(){
+    this.rankings()
   },
 
   rankings: function(){
@@ -47,8 +53,20 @@ var AppRouter = Backbone.Router.extend({
     var user = new FacebookUser();
     user.login(function(response){
       FB.api('/me', function(response) {
-        $("#name-display").html("<a>" + response.name + "</a>");
+        if (response && !response.error) {
+          loginView.renderLoggedIn(response.name)
+        }
       });
+    });
+  },
+
+  logout: function(){
+    FB.getLoginStatus(function(response) {
+      if (response && response.status === 'connected') {
+        FB.logout(function(response) {
+            loginView.render()
+        });
+      }
     });
   }
 });
