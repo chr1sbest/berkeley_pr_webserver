@@ -1,6 +1,8 @@
 // Initialize Navbar
 var navView = new NavView();
 
+FB.init({appId: '1705522486327956'})
+
 // Build application router
 var AppRouter = Backbone.Router.extend({
   routes: {
@@ -9,6 +11,7 @@ var AppRouter = Backbone.Router.extend({
     "matches": "matches",
     "tournaments": "tournaments",
     "about": "about",
+    "login": "login",
     "players/:id": "player",
   },
 
@@ -38,9 +41,19 @@ var AppRouter = Backbone.Router.extend({
   },
 
   player: function(id){
+  },
+
+  login: function(){
+    var user = new FacebookUser();
+    user.login(function(response){
+      FB.api('/me', function(response) {
+        $("#name-display").html("<a>" + response.name + "</a>");
+      });
+    });
   }
 });
 
 // Initiate the router
 var app_router = new AppRouter;
 Backbone.history.start()
+

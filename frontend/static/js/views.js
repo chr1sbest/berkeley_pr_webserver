@@ -1,4 +1,3 @@
-// View for top Navbar.
 var NavView = Backbone.View.extend({
   el: '#nav',
 
@@ -18,7 +17,6 @@ var NavView = Backbone.View.extend({
 });
 
 
-// View for Rankings.
 var RankingView = Backbone.View.extend({
   el: '#container',
 
@@ -45,7 +43,6 @@ var RankingView = Backbone.View.extend({
 });
 
 
-// View for About us.
 var AboutView = Backbone.View.extend({
   el: '#container',
 
@@ -61,3 +58,17 @@ var AboutView = Backbone.View.extend({
     return this;
   }
 });
+
+
+var LoginView = Backbone.View.extend({
+  el: '#login',
+
+  initialize: function(){
+    this.render()
+  },
+
+  render: function(){
+    return this;
+  }
+});
+
