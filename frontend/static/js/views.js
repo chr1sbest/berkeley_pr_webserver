@@ -55,7 +55,7 @@ var AboutView = Backbone.View.extend({
 
   render: function(){
     var AboutPointer = this;
-    $.get('static/templates/about.html', function(about){
+    $.get('frontend/templates/about.html', function(about){
       AboutPointer.$el.html(about);
     });
     return this;
