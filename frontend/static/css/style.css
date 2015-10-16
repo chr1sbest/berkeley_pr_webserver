@@ -1,12 +1,11 @@
-ul {
-	padding-top: 2em;
-	background-color: green;
+ul .element{
+	padding-top: 2em;;
 	white-space:nowrap;
 }
 .panel-body {
 	background-color: blue;
 }
-li{
+.format{
 	display: inline;
 	padding: 1em 1em;
 	margin: .5em 0em;
