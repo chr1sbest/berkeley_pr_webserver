@@ -3,6 +3,7 @@ var navView = new NavView();
 var loginView = new LoginView()
 
 FB.init({appId: '1705522486327956'})
+var user = new FacebookUser();
 
 // Build application router
 var AppRouter = Backbone.Router.extend({
@@ -15,6 +16,7 @@ var AppRouter = Backbone.Router.extend({
     "login": "login",
     "logout": "logout",
     "players/:id": "player",
+    "noop": "noop"
   },
 
   home: function(){
@@ -49,12 +51,16 @@ var AppRouter = Backbone.Router.extend({
   player: function(id){
   },
 
+  noop: function(){
+  },
+
   login: function(){
-    var user = new FacebookUser();
     user.login(function(response){
       FB.api('/me', function(response) {
         if (response && !response.error) {
           loginView.renderLoggedIn(response.name)
+        } else {
+          app_router.navigate('/noop')
         }
       });
     });
@@ -74,4 +80,3 @@ var AppRouter = Backbone.Router.extend({
 // Initiate the router
 var app_router = new AppRouter;
 Backbone.history.start()
-
