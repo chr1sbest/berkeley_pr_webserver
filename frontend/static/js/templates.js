@@ -5,7 +5,7 @@ Handlebars.registerHelper('list', function(items, options) {
         var item = items[i];
 	var ranking = i + 1;	    
 	var player = item.player;
-    	var rating = item.rating.toString().substring(0,6);
+    	var rating = Math.round(item.rating * 1000) / 1000/*toString().substring(0,6);*/
 	var out = out + "<tr>" + "<td>" + ranking + "</td>" + "<td>" + player + "</td>" + "<td>" + rating + "<td>" + "</tr>";
   }
   return out + "</tbody>" + "</table>";
