@@ -1,5 +1,6 @@
 // Initialize Navbar
 var navView = new NavView();
+var footer = new FooterView();
 
 // Build application router
 var AppRouter = Backbone.Router.extend({
