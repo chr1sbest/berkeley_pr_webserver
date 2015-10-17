@@ -61,3 +61,20 @@ var AboutView = Backbone.View.extend({
     return this;
   }
 });
+
+// View for footer view.
+var FooterView = Backbone.View.extend({
+  el: '#footer',
+
+  initialize: function(){
+    this.render()
+  },
+
+  render: function(){
+    var AboutPointer = this;
+    $.get('frontend/templates/footer.html', function(footerTemplate){
+      AboutPointer.$el.html(footerTemplate);
+    });
+    return this;
+  }
+});
