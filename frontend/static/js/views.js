@@ -44,7 +44,22 @@ var RankingView = Backbone.View.extend({
   }
 });
 
+//View for Players.
+var PlayersView = Backbone.View.extend({
+  el: '#container',
 
+  initialize: function(){
+    this.render()
+  },
+
+  render: function(){
+    var PlayersPointer = this;
+    $.get('frontend/templates/players.html', function(players){
+      PlayersPointer.$el.html(players);
+    });
+    return this;
+  }
+});
 // View for About us.
 var AboutView = Backbone.View.extend({
   el: '#container',

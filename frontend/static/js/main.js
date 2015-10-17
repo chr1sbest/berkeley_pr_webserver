@@ -9,7 +9,8 @@ var AppRouter = Backbone.Router.extend({
     "matches": "matches",
     "tournaments": "tournaments",
     "about": "about",
-    "players/:id": "player",
+    "players": "players",
+    "players/:id": "players"
   },
 
   rankings: function(){
@@ -37,8 +38,13 @@ var AppRouter = Backbone.Router.extend({
     var aboutView = new AboutView();
   },
 
-  player: function(id){
+  players: function(){
+    var playersView = new PlayersView();
+  },
+
+  players_id: function(id){
   }
+
 });
 
 // Initiate the router
