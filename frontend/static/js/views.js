@@ -61,7 +61,6 @@ var PlayerView = Backbone.View.extend({
   
   render:function(){
     var PlayerPointer = this;
-    console.log("QFDFSDF");
     $.get('frontend/templates/player.html', function(playerTemplate){
       var temp = Handlebars.compile(playerTemplate)
       var compiled = temp(PlayerPointer.model.attributes);
