@@ -10,7 +10,11 @@ var AppRouter = Backbone.Router.extend({
     "tournaments": "tournaments",
     "about": "about",
     "players/:id": "player",
-  }, rankings: function(){ // Initialize rankingView and currentRanks model
+    "players": "playerSearch"
+  },
+
+  // Initialize rankingView and currentRanks model
+  rankings: function(){
     var currentRanks = new Rankings();
     var rankingView = new RankingView({model: currentRanks});
     // Fetch ranking data and update views accordingly
@@ -34,10 +38,10 @@ var AppRouter = Backbone.Router.extend({
     var aboutView = new AboutView();
   },
 
-  
   player: function(id){
     //placeholder for eventual search bar created
-    console.log('hi');
+    var searchModel = new AllPlayers();
+    var searchView = new PlayerSearchView({model: searchModel})
     var playerModel = new Players({id: id});
     var playerView = new PlayerView({model: playerModel});
     playerModel.fetch({
@@ -49,6 +53,19 @@ var AppRouter = Backbone.Router.extend({
       }
     });
   },
+
+  playerSearch: function(){
+    var searchModel = new AllPlayers();
+    var searchView = new PlayerSearchView({model: searchModel})
+    searchModel.fetch({
+      success: function() {
+        searchView.render()
+      },
+      error: function() {
+        searchView.renderFailure()
+      }
+    });
+  }
 });
 
 // Initiate the router
