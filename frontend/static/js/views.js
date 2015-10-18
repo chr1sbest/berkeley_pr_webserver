@@ -51,19 +51,33 @@ var DefaultPlayerView = Backbone.View.extend({
   initialize: function(){
     this.render()
   },
+});
 
-// View for players currently only shows playerid
 var PlayerView = Backbone.View.extend({
-  el:'#container',
+  el: '#container',
 
-  initialize: function(){ 
-    this.render()
+  initialize: function(){
+  },
+  
+  render:function(){
+    var PlayerPointer = this;
+    console.log("QFDFSDF");
+    $.get('frontend/templates/player.html', function(playerTemplate){
+      var temp = Handlebars.compile(playerTemplate)
+      var compiled = temp(PlayerPointer.model.attributes);
+      PlayerPointer.$el.html(compiled);
+    });
+    return this;
   },
 
-  render: function(){
-    this.$el.html(this.id);
+  renderFailure: function(){
+    this.$el.html('<p>Failed to retrieve data from API.</p>');
+    return this;
   }
+
 });
+
+
 
 //Player search view placeholder.
 var PlayerSearchView = Backbone.View.extend({

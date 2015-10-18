@@ -10,10 +10,7 @@ var AppRouter = Backbone.Router.extend({
     "tournaments": "tournaments",
     "about": "about",
     "players/:id": "player",
-  },
-
-  rankings: function(){
-    // Initialize rankingView and currentRanks model
+  }, rankings: function(){ // Initialize rankingView and currentRanks model
     var currentRanks = new Rankings();
     var rankingView = new RankingView({model: currentRanks});
     // Fetch ranking data and update views accordingly
@@ -40,8 +37,17 @@ var AppRouter = Backbone.Router.extend({
   
   player: function(id){
     //placeholder for eventual search bar created
-    var playerView = new PlayerView({id: id});
-    var pSearchView = new PlayerSearchView();
+    console.log('hi');
+    var playerModel = new Players({id: id});
+    var playerView = new PlayerView({model: playerModel});
+    playerModel.fetch({
+      success: function() {
+        playerView.render()
+      },
+      error: function() {
+        playerView.renderFailure()
+      }
+    });
   },
 });
 
