@@ -44,6 +44,40 @@ var RankingView = Backbone.View.extend({
   }
 });
 
+//View when you click the player tab.
+var DefaultPlayerView = Backbone.View.extend({
+  el:'#container',
+
+  initialize: function(){
+    this.render()
+  },
+
+// View for players currently only shows playerid
+var PlayerView = Backbone.View.extend({
+  el:'#container',
+
+  initialize: function(){ 
+    this.render()
+  },
+
+  render: function(){
+    this.$el.html(this.id);
+  }
+});
+
+//Player search view placeholder.
+var PlayerSearchView = Backbone.View.extend({
+  el: '#search',
+
+  initialize: function(){
+    this.render()
+  },
+
+  render: function(){
+    this.$el.html('search');
+  }
+});
+
 
 // View for About us.
 var AboutView = Backbone.View.extend({

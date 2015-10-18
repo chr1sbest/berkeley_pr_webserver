@@ -37,8 +37,12 @@ var AppRouter = Backbone.Router.extend({
     var aboutView = new AboutView();
   },
 
+  
   player: function(id){
-  }
+    //placeholder for eventual search bar created
+    var playerView = new PlayerView({id: id});
+    var pSearchView = new PlayerSearchView();
+  },
 });
 
 // Initiate the router
