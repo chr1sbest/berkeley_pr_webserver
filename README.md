@@ -22,6 +22,7 @@ python webserver.py
 
 To run the application with Browsersync for live code reload, run:
 ```
+sudo npm install -g gulp
 cd frontend
 npm install
 gulp
