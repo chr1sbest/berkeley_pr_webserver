@@ -1,4 +1,3 @@
-// List helper
 Handlebars.registerHelper('list', function(items, options) {
   var out = '';
   for(var i=0, l=items.length; i<l; i++) {

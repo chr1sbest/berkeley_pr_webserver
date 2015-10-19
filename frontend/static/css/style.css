@@ -1,6 +1,5 @@
-.table th {
-	border: 0 !important;
-}
+ul {list-style-type: none;padding-left:0;}
+.table th {border: 0 !important;}
 .collapsing{ -webkit-transition:height .01s ease; transition:height .01s ease }
 .win { background-color: #80FF80}
 .loss { background-color: #FFB2B2}
