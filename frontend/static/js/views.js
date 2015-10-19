@@ -43,18 +43,9 @@ var RankingView = Backbone.View.extend({
   }
 });
 
-//View when you click the player tab.
-var DefaultPlayerView = Backbone.View.extend({
-  el:'#container',
-
-  initialize: function(){
-    this.render()
-  },
-});
-
 
 var PlayerView = Backbone.View.extend({
-  el: '#container',
+  el: '#playerView',
 
   initialize: function(){
   },
@@ -78,7 +69,7 @@ var PlayerView = Backbone.View.extend({
 
 
 var PlayerSearchView = Backbone.View.extend({
-  el: '#container',
+  el: '#searchView',
 
   initialize: function(){
   },
@@ -146,6 +137,27 @@ var AboutView = Backbone.View.extend({
     $.get('frontend/templates/about.html', function(about){
       aboutPointer.$el.html(about);
     });
+    return this;
+  }
+});
+
+
+var PlayersParentView = Backbone.View.extend({
+  el: '#container',
+
+  initialize: function(){
+    this.render()
+  },
+
+  render: function(){
+    var playersParent = '\
+    <div class="panel panel-default">\
+      <div class="panel-body">\
+        <div id="searchView"></div>\
+        <div id="playerView"></div>\
+      </div>\
+    </div>';
+    this.$el.html(playersParent);
     return this;
   }
 });

@@ -28,20 +28,33 @@ var AppRouter = Backbone.Router.extend({
     });
   },
 
-  matches: function(){
-  },
+//   matches: function(){
+//   },
 
-  tournaments: function(){
-  },
+//   tournaments: function(){
+//   },
 
   about: function(){
     var aboutView = new AboutView();
   },
 
   player: function(id){
-    //placeholder for eventual search bar created
+    // Initialize main player page
+    var playerParent = new PlayersParentView();
+
+    // Initialize search view
     var searchModel = new AllPlayers();
     var searchView = new PlayerSearchView({model: searchModel})
+    searchModel.fetch({
+      success: function() {
+        searchView.render()
+      },
+      error: function() {
+        searchView.renderFailure()
+      }
+    });
+
+    // Initialize individual player view
     var playerModel = new Players({id: id});
     var playerView = new PlayerView({model: playerModel});
     playerModel.fetch({
@@ -55,6 +68,10 @@ var AppRouter = Backbone.Router.extend({
   },
 
   playerSearch: function(){
+    // Initialize main player page
+    var playerParent = new PlayersParentView();
+
+    // Initialize search view
     var searchModel = new AllPlayers();
     var searchView = new PlayerSearchView({model: searchModel})
     searchModel.fetch({
