@@ -1,16 +1,27 @@
 // Initialize Navbar
 var navView = new NavView();
+var loginView = new LoginView()
+
+FB.init({appId: '1705522486327956'})
+var user = new FacebookUser();
 
 // Build application router
 var AppRouter = Backbone.Router.extend({
   routes: {
-    "": "rankings", // Default route
+    "": "home", // Default route
     "rankings": "rankings",
     "matches": "matches",
     "tournaments": "tournaments",
     "about": "about",
+    "login": "login",
+    "logout": "logout",
     "players/:id": "player",
-    "players": "playerSearch"
+    "players": "playerSearch",
+    "noop": "noop"
+  },
+
+  home: function(){
+    this.rankings()
   },
 
   // Initialize rankingView and currentRanks model
@@ -80,6 +91,31 @@ var AppRouter = Backbone.Router.extend({
       },
       error: function() {
         searchView.renderFailure()
+      }
+    });
+  },
+
+  noop: function(){
+  },
+
+  login: function(){
+    user.login(function(response){
+      FB.api('/me', function(response) {
+        if (response && !response.error) {
+          loginView.renderLoggedIn(response.name)
+        } else {
+          app_router.navigate('/noop')
+        }
+      });
+    });
+  },
+
+  logout: function(){
+    FB.getLoginStatus(function(response) {
+      if (response && response.status === 'connected') {
+        FB.logout(function(response) {
+            loginView.render()
+        });
       }
     });
   }
