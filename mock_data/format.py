@@ -1,5 +1,4 @@
 import json
-from IPython.core.debugger import Tracer
 
 def format_data(player_ids):
     playerList = []
