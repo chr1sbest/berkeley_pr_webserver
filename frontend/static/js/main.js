@@ -10,10 +10,11 @@ var AppRouter = Backbone.Router.extend({
     "tournaments": "tournaments",
     "about": "about",
     "players/:id": "player",
+    "players": "playerSearch"
   },
 
+  // Initialize rankingView and currentRanks model
   rankings: function(){
-    // Initialize rankingView and currentRanks model
     var currentRanks = new Rankings();
     var rankingView = new RankingView({model: currentRanks});
     // Fetch ranking data and update views accordingly
@@ -27,17 +28,60 @@ var AppRouter = Backbone.Router.extend({
     });
   },
 
-  matches: function(){
-  },
+//   matches: function(){
+//   },
 
-  tournaments: function(){
-  },
+//   tournaments: function(){
+//   },
 
   about: function(){
     var aboutView = new AboutView();
   },
 
   player: function(id){
+    // Initialize main player page
+    var playerParent = new PlayersParentView();
+
+    // Initialize search view
+    var searchModel = new AllPlayers();
+    var searchView = new PlayerSearchView({model: searchModel})
+    searchModel.fetch({
+      success: function() {
+        searchView.render()
+      },
+      error: function() {
+        searchView.renderFailure()
+      }
+    });
+
+    // Initialize individual player view
+    var playerModel = new Players({id: id});
+    var playerView = new PlayerView({model: playerModel});
+    playerModel.fetch({
+      success: function() {
+        playerView.render()
+      },
+      error: function() {
+        playerView.renderFailure()
+      }
+    });
+  },
+
+  playerSearch: function(){
+    // Initialize main player page
+    var playerParent = new PlayersParentView();
+
+    // Initialize search view
+    var searchModel = new AllPlayers();
+    var searchView = new PlayerSearchView({model: searchModel})
+    searchModel.fetch({
+      success: function() {
+        searchView.render()
+      },
+      error: function() {
+        searchView.renderFailure()
+      }
+    });
   }
 });
 
