@@ -11,7 +11,7 @@ application = Flask(__name__,
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 @application.route("/")
-def hello():
+def index():
     return render_template('index.html')
 
 @application.route("/rankings")
@@ -29,6 +29,14 @@ def player(player_id):
     with open(path, 'r') as data:
         player_data = json.load(data)
     return jsonify(**player_data)
+
+@application.route("/players")
+def all_players():
+    path = os.path.join(CURRENT_DIR, 'mock_data/all_players.json')
+    with open(path, 'r') as data:
+        player_data = json.load(data)
+    return Response(json.dumps(player_data),
+                    mimetype='application/json')
 
 if __name__ == "__main__":
     application.run()
