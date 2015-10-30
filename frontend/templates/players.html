@@ -1,0 +1,86 @@
+<div class="col-md-offset-1 col-md-10 col-md-offset-1 maindiv">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Player Profile</h2>
+    </div>
+    <div class="panel-body">
+      <div class="col-xs-3 col-sm-2 col-md-1">
+        <i class="fa fa-user fa-5x vcenter"></i>
+      </div>
+      <div class="col-xs-9 col-sm-10 col-md-11 ">
+        <table class="table">
+          <tbody>
+          <tr>
+            <td class="col-xs-3 col-md-2">Name</td>
+            <td><b>{{id}}</b></td>
+          </tr>
+          <tr>
+            <td class="col-xs-3 col-md-2">Rank</td>
+            <td>{{rank}}</td>
+          </tr>
+          <tr>
+            <td class="col-xs-3 col-md-2">Matches Played</td>
+            <td>{{matchesPlayed}}</td>
+          </tr>
+          <tr>
+            <td class="col-xs-3 col-md-2">W-L (%)</td>
+            <td>{{winRate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> 
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Recent Matches</h2>
+    </div>
+    <div class="panel-body">
+      <table class='table table-striped'>
+        <thead>
+          <tr><th>Date</th><th>Opponent</th><th>Result</th><th>Tournament</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#playerMatches}}
+        <b>{{opp}}<b>{{outcome}}</b> {{tournament}}
+          {{/playerMatches}}
+          </tbody>
+        </table>
+      </div>
+    </div>  
+  </div>
+
+  <!-- <tr> -->
+  <!--   <th>Date</th> -->
+  <!--   <th>Opponent</th> -->
+  <!--   <th>Result</th> -->
+  <!--   <th>Tournament</th> -->
+  <!-- </tr> -->
+  <!-- </thead> -->
+  <!-- <tbody> -->
+  <!-- <tr class="win"><td class="col-md-2">10/17/2015<td>vs SFAT</td><td>Win</td><td>EVO 2015</td></tr> -->
+  <!-- <tr class="loss"><td class="col-md-2">10/17/2015<td>vs SFAT</td><td>Loss</td><td>EVO 2015</td></tr> -->
+  <!-- <tr class="win"><td class="col-md-2">10/17/2015<td>vs SFAT</td><td>Win</td><td>EVO 2015</td></tr> -->
+  <!-- <tr class="loss"><td class="col-md-2">10/17/2015<td>vs SFAT</td><td>Loss</td><td>EVO 2015</td></tr> -->
+  <!-- <tr class="win"><td class="col-md-2">10/17/2015<td>vs SFAT</td><td>Win</td><td>EVO 2015</td></tr> -->
+  <!-- <tr class="loss"><td class="col-md-2">10/17/2015<td>vs SFAT</td><td>Loss</td><td>EVO 2015</td></tr> -->
+  <!-- <tr class="win"><td class="col-md-2">10/17/2015<td>vs SFAT</td><td>Win</td><td>EVO 2015</td></tr> -->
+  <!-- <tr class="loss"><td class="col-md-2">10/17/2015<td>vs SFAT</td><td>Loss</td><td>EVO 2015</td></tr> -->
+  <!-- <tr class="win"><td class="col-md-2">10/17/2015<td>vs SFAT</td><td>Win</td><td>EVO 2015</td></tr> -->
+  <!-- <tr class="loss"><td class="col-md-2">10/17/2015<td>vs SFAT</td><td>Loss</td><td>EVO 2015</td></tr> -->
+  <!-- <tr class="clickable" data-toggle="collapse" id="showmore" data-target=".showmorecollapsed"> -->
+  <!-- <td class="deleterow" colspan="4" style="text-align:center">Show More &#x25BC</td> -->
+  <!-- </tr> -->
+  <!-- <tr class="collapse out budgets showmorecollapsed"> -->
+  <!-- <td> gucci</td> -->
+  <!-- </tr> -->
+
+  <!-- <script> -->
+  <!-- $(".deleterow").on("click", function(){ -->
+  <!--     var $killrow = $(this).parent('tr'); -->
+  <!--     $killrow.addClass("danger"); -->
+  <!--     $killrow.fadeOut(100, function(){ -->
+  <!--       $(this).remove(); -->
+  <!--       });}); -->
+  <!-- </script> -->

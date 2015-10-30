@@ -19,9 +19,8 @@ var AppRouter = Backbone.Router.extend({
     "players": "playerSearch",
     "noop": "noop"
   },
-
   home: function(){
-    this.rankings()
+    var homeView = new HomeView();
   },
 
   // Initialize rankingView and currentRanks model
@@ -119,7 +118,9 @@ var AppRouter = Backbone.Router.extend({
       }
     });
   }
+
 });
+
 
 // Initiate the router
 var app_router = new AppRouter;
