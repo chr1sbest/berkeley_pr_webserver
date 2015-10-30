@@ -1,4 +1,3 @@
-// View for top Navbar.
 var NavView = Backbone.View.extend({
   el: '#nav',
 
@@ -12,6 +11,9 @@ var NavView = Backbone.View.extend({
       // get navbar html from our templates/navbar.html
       // Assign html for this element to the navbar.html template
       navPointer.$el.html(navbarTemplate);
+      // Additionally, after successfully loading the navbar template,
+      // we will also render the loginView portion of the navbar
+      loginView.render()
     });
     return this;
   },
@@ -136,6 +138,33 @@ var AboutView = Backbone.View.extend({
     var aboutPointer = this;
     $.get('frontend/templates/about.html', function(about){
       aboutPointer.$el.html(about);
+    });
+    return this;
+  }
+});
+
+
+var LoginView = Backbone.View.extend({
+  initialize: function(){
+  },
+
+  render: function(){
+    var loginpointer = this;
+    this.setElement('#login')
+    $.get('frontend/templates/logged_out.html', function(logout){
+      loginpointer.$el.html(logout);
+    });
+    return this;
+  },
+
+  renderLoggedIn: function(name){
+    var loginpointer = this;
+    this.setElement('#login')
+    var name = name;
+    $.get('frontend/templates/logged_in.html', function(loggedInTemplate){
+      var template = Handlebars.compile(loggedInTemplate);
+      var compiledHtml = template({name: name});
+      loginpointer.$el.html(compiledHtml);
     });
     return this;
   }
