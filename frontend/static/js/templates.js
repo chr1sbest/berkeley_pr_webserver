@@ -5,4 +5,4 @@ Handlebars.registerHelper('list', function(items, options) {
     out = out + "<li>" + options.fn(items[i]) + "</li>";
   }
   return out + "</ol>";
-});
+})
