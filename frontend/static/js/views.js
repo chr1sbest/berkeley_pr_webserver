@@ -19,6 +19,21 @@ var NavView = Backbone.View.extend({
   },
 });
 
+var HomeView = Backbone.View.extend({
+  el: '#container',
+
+  initialize: function(){
+    this.render()
+  },
+
+  render: function(){
+    var homePointer = this;
+    $.get('frontend/templates/home.html', function(home){
+      homePointer.$el.html(home);
+    });
+    return this;
+  }
+});
 
 var RankingView = Backbone.View.extend({
   el: '#container',
@@ -54,7 +69,7 @@ var PlayerView = Backbone.View.extend({
   
   render:function(){
     var playerPointer = this;
-    $.get('frontend/templates/player.html', function(playerTemplate){
+    $.get('frontend/templates/players.html', function(playerTemplate){
       var temp = Handlebars.compile(playerTemplate)
       var compiled = temp(playerPointer.model.attributes);
       playerPointer.$el.html(compiled);
@@ -102,6 +117,33 @@ var PlayerSearchView = Backbone.View.extend({
       $("#inputSearch").on('keyup', function() {
         searchPointer.search()
       });
+
+      // HACK FIX THIS LATER
+      // Set event listener to watch for button click
+      $("#meButton").on("click", function(){
+        var id = FB.getUserID()
+        if (id == "") {
+          alert("Please login with facebook (top-left)");
+        } else {
+          // If the user is logged in, direct them to the survey page.
+          // Add current page URL to facebook user object
+          var FBObject = user;
+          var url_list = window.location.href.split('/');
+          var url = url_list[url_list.length - 1];
+          var FBObject = {participant: url, id: id}
+          alert('Please copy paste the following text into the survey.:\n\n\n' + JSON.stringify(FBObject));
+
+          // Open new window to survey
+          var win = window.open('http://goo.gl/forms/TghLC2Zfek', '_blank');
+          if(win){
+            //Browser has allowed it to be opened
+            win.focus();
+          } else{
+            //Broswer has blocked it
+            alert('Please allow popups for this site');
+          }
+        }
+      });
     });
     return this;
   },
@@ -144,6 +186,27 @@ var AboutView = Backbone.View.extend({
 });
 
 
+var PlayersParentView = Backbone.View.extend({
+  el: '#container',
+
+  initialize: function(){
+    this.render()
+  },
+
+  render: function(){
+    var playersParent = '\
+    <div class="panel panel-default">\
+      <div class="panel-body">\
+        <div id="searchView"></div>\
+        <div id="playerView"></div>\
+      </div>\
+    </div>';
+    this.$el.html(playersParent);
+    return this;
+  }
+});
+
+
 var LoginView = Backbone.View.extend({
   initialize: function(){
   },
@@ -166,27 +229,6 @@ var LoginView = Backbone.View.extend({
       var compiledHtml = template({name: name});
       loginpointer.$el.html(compiledHtml);
     });
-    return this;
-  }
-});
-
-
-var PlayersParentView = Backbone.View.extend({
-  el: '#container',
-
-  initialize: function(){
-    this.render()
-  },
-
-  render: function(){
-    var playersParent = '\
-    <div class="panel panel-default">\
-      <div class="panel-body">\
-        <div id="searchView"></div>\
-        <div id="playerView"></div>\
-      </div>\
-    </div>';
-    this.$el.html(playersParent);
     return this;
   }
 });
