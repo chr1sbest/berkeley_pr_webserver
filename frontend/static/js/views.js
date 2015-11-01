@@ -121,29 +121,36 @@ var PlayerSearchView = Backbone.View.extend({
       // HACK FIX THIS LATER
       // Set event listener to watch for button click
       $("#meButton").on("click", function(){
-        var id = FB.getUserID()
-        if (id == "") {
-          alert("Please login with facebook (top-left)");
-        } else {
-          // If the user is logged in, direct them to the survey page.
-          // Add current page URL to facebook user object
-          var FBObject = user;
-          var url_list = window.location.href.split('/');
-          var url = url_list[url_list.length - 1];
-          var FBObject = {participant: url, id: id}
-          alert('Please copy paste the following text into the survey.:\n\n\n' + JSON.stringify(FBObject));
-
-          // Open new window to survey
-          var win = window.open('http://goo.gl/forms/TghLC2Zfek', '_blank');
-          if(win){
-            //Browser has allowed it to be opened
-            win.focus();
-          } else{
-            //Broswer has blocked it
-            alert('Please allow popups for this site');
-          }
-        }
+        $.post("/this_is_me");
+        $(function () {
+          $('#myModal').modal('toggle');
+        });
       });
+      
+          
+      //  var id = FB.getUserID()
+      //  if (id == "") {
+      //    alert("Please login with facebook (top-left)");
+      //  } else {
+      //    // If the user is logged in, direct them to the survey page.
+      //    // Add current page URL to facebook user object
+      //    var FBObject = user;
+      //    var url_list = window.location.href.split('/');
+      //    var url = url_list[url_list.length - 1];
+      //    var FBObject = {participant: url, id: id}
+      //    alert('Please copy paste the following text into the survey.:\n\n\n' + JSON.stringify(FBObject));
+
+      //    // Open new window to survey
+      //    var win = window.open('http://goo.gl/forms/TghLC2Zfek', '_blank');
+      //    if(win){
+      //      //Browser has allowed it to be opened
+      //      win.focus();
+      //    } else{
+      //      //Broswer has blocked it
+      //      alert('Please allow popups for this site');
+      //    }
+      //  }
+      //});
     });
     return this;
   },
