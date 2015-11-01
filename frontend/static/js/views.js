@@ -19,6 +19,7 @@ var NavView = Backbone.View.extend({
   },
 });
 
+
 var HomeView = Backbone.View.extend({
   el: '#container',
 
@@ -34,6 +35,7 @@ var HomeView = Backbone.View.extend({
     return this;
   }
 });
+
 
 var RankingView = Backbone.View.extend({
   el: '#container',
@@ -73,6 +75,27 @@ var PlayerView = Backbone.View.extend({
       var temp = Handlebars.compile(playerTemplate)
       var compiled = temp(playerPointer.model.attributes);
       playerPointer.$el.html(compiled);
+
+      // Set event listener to watch for button click on modal
+      // If the user is logged into facebook, send a POST request
+      // to our API to log their submission.
+      $("#meConfirm").on("click", function(){
+        var id = FB.getUserID()
+        if (id == "") {
+          alert("Please login with facebook (top-right)");
+        } else {
+          // Add current page URL to facebook user object
+          var url_list = window.location.href.split('/');
+          var url = url_list[url_list.length - 1];
+          var FBObject = {player_id: url, facebook_id: id}
+        }
+
+        // Make post request to API
+        console.log(FBObject);
+        $.post('/this_is_me', FBObject, function(){
+          console.log("success");
+        })
+      });
     });
     
     //clear search input
@@ -123,6 +146,7 @@ var PlayerSearchView = Backbone.View.extend({
       $("#inputSearch").on('keyup', function() {
         searchPointer.search()
       });
+<<<<<<< HEAD
 
       // HACK FIX THIS LATER
       var id = FB.getUserID()
@@ -152,7 +176,10 @@ var PlayerSearchView = Backbone.View.extend({
          //request with URL,data,success callback
         $.post('/this_is_me', JSON.stringify(FBObject));
       });
+=======
+>>>>>>> 7f76162ec7f443c7be81a108b7fd3596b18682f3
     });
+
     return this;
   },
 
