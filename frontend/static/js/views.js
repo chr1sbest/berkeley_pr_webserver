@@ -74,6 +74,12 @@ var PlayerView = Backbone.View.extend({
       var compiled = temp(playerPointer.model.attributes);
       playerPointer.$el.html(compiled);
     });
+    
+    //clear search input
+    $("#inputSearch").val('');
+    
+    //clear player results list
+    $("#results").html('');
     return this;
   },
 
@@ -141,6 +147,7 @@ var PlayerSearchView = Backbone.View.extend({
         //}
       }
       // Set event listener to watch for button click
+<<<<<<< HEAD
       $("#myModal").on("click", function(){
          //request with URL,data,success callback
         $.post('/this_is_me', JSON.stringify(FBObject));
