@@ -74,6 +74,8 @@ var PlayerView = Backbone.View.extend({
       var compiled = temp(playerPointer.model.attributes);
       playerPointer.$el.html(compiled);
     });
+    $("#inputSearch").val('');
+    $("#results").html('');
     return this;
   },
 
