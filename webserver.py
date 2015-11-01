@@ -1,6 +1,7 @@
 import os
 import json
-from flask import Flask, Response, jsonify, render_template
+import csv
+from flask import Flask, Response, request, jsonify, render_template
 
 # Initialize flask application
 application = Flask(__name__,
@@ -37,6 +38,17 @@ def all_players():
         player_data = json.load(data)
     return Response(json.dumps(player_data),
                     mimetype='application/json')
+
+@application.route("/this_is_me", methods=["POST"])
+def this_is_me():
+    """ Parse form POST data: fb_id and player_id and then
+    append this data as a new line to our csv log. """
+    fb_id = request.form['facebook_id']
+    player_id = request.form['player_id']
+    with open('me_log.csv', 'a') as logfile:
+        writer = csv.writer(logfile)
+        writer.writerow([fb_id, player_id])
+        return Response(status=200)
 
 if __name__ == "__main__":
     application.run()
