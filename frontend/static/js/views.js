@@ -123,7 +123,7 @@ var PlayerSearchView = Backbone.View.extend({
       $("#meButton").on("click", function(){
         var id = FB.getUserID()
         if (id == "") {
-          alert("Please login with facebook (top-left)");
+          alert("Please login with facebook (top-right)");
         } else {
           // If the user is logged in, direct them to the survey page.
           // Add current page URL to facebook user object
