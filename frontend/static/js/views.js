@@ -19,6 +19,7 @@ var NavView = Backbone.View.extend({
   },
 });
 
+
 var HomeView = Backbone.View.extend({
   el: '#container',
 
@@ -34,6 +35,7 @@ var HomeView = Backbone.View.extend({
     return this;
   }
 });
+
 
 var RankingView = Backbone.View.extend({
   el: '#container',
@@ -73,7 +75,29 @@ var PlayerView = Backbone.View.extend({
       var temp = Handlebars.compile(playerTemplate)
       var compiled = temp(playerPointer.model.attributes);
       playerPointer.$el.html(compiled);
+
+      // Set event listener to watch for button click on modal
+      // If the user is logged into facebook, send a POST request
+      // to our API to log their submission.
+      $("#meConfirm").on("click", function(){
+        var id = FB.getUserID()
+        if (id == "") {
+          alert("Please login with facebook (top-right)");
+        } else {
+          // Add current page URL to facebook user object
+          var url_list = window.location.href.split('/');
+          var url = url_list[url_list.length - 1];
+          var FBObject = {player_id: url, facebook_id: id}
+        }
+
+        // Make post request to API
+        console.log(FBObject);
+        $.post('/this_is_me', FBObject, function(){
+          console.log("success");
+        })
+      });
     });
+
     return this;
   },
 
@@ -117,35 +141,8 @@ var PlayerSearchView = Backbone.View.extend({
       $("#inputSearch").on('keyup', function() {
         searchPointer.search()
       });
-
-      // HACK FIX THIS LATER
-      var id = FB.getUserID()
-      if (id == "") {
-        alert("Please login with facebook (top-left)");
-      } else {
-        // If the user is logged in, direct them to the survey page.
-        // Add current page URL to facebook user object
-        var FBObject = user;
-        var url_list = window.location.href.split('/');
-        var url = url_list[url_list.length - 1];
-        var FBObject = {participant: url, id: id}
-        //alert('Please copy paste the following text into the survey.:\n\n\n' + JSON.stringify(FBObject));
-               // Open new window to survey
-        //var win = window.open('http://goo.gl/forms/TghLC2Zfek', '_blank');
-        //if(win){
-        //  //Browser has allowed it to be opened
-        //  win.focus();
-        //} else{
-        //  //Broswer has blocked it
-        //  alert('Please allow popups for this site');
-        //}
-      }
-      // Set event listener to watch for button click
-      $("#myModal").on("click", function(){
-         //request with URL,data,success callback
-        $.post('/this_is_me', JSON.stringify(FBObject));
-      });
     });
+
     return this;
   },
 

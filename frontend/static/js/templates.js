@@ -53,7 +53,6 @@ Handlebars.registerHelper('list', function(items, options) {
 });
 
 Handlebars.registerHelper('playerMatches', function(items, options) {
-  console.log(items);
   var out = '';
   var player_data  = items.data.root;
   var matches = player_data['matches'];
