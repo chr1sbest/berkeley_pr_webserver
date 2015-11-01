@@ -146,7 +146,6 @@ var PlayerSearchView = Backbone.View.extend({
       $("#inputSearch").on('keyup', function() {
         searchPointer.search()
       });
-<<<<<<< HEAD
 
       // HACK FIX THIS LATER
       var id = FB.getUserID()
@@ -169,15 +168,9 @@ var PlayerSearchView = Backbone.View.extend({
         //  //Broswer has blocked it
         //  alert('Please allow popups for this site');
         //}
-      }
       // Set event listener to watch for button click
-<<<<<<< HEAD
-      $("#myModal").on("click", function(){
-         //request with URL,data,success callback
-        $.post('/this_is_me', JSON.stringify(FBObject));
-      });
-=======
->>>>>>> 7f76162ec7f443c7be81a108b7fd3596b18682f3
+      
+      }
     });
 
     return this;
