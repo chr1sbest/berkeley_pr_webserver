@@ -6,13 +6,39 @@
     <div class="panel-body">
       <table class="table table-striped rankings_table">
         <thead>
-          <tr><th>Rank</th><th>Character</th><th>Player</th><th>Record</th><th>Rating</th><th>League</th>
+          <tr>
+            <th class="header_center">Rank</th>
+            <th class="header_center">Character</th>
+            <th class="header_center">Player</th>
+            <th class="header_center">Record</th>
+            <th class="header_center">Rating</th>
+            <th class="header_center">League</th>
           </tr>
         </thead>
-          <tbody>
-            {{#list data}}<b>{{player}}</b> -- {{rating}}{{/list}}
-          </tbody>
+        <tbody>
+        {{#list data}}<b>{{player}}</b> -- {{rating}}{{/list}}
+        </tbody>
       </table>
     </div>
   </div>
 </div>
+<div class="row"></div>
+<!-- Footer -->
+<footer class="text-center">
+  <div class="footer-below">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-8">
+          <ul class="footer_links">
+          <li><a href="#rankings">Rankings</a></li>
+          <li><a href="#players">Players</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+        </div>
+        <div class="col-xs-4 copyright">
+          Copyright &copy; 2015. All Rights Reserved. 
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
