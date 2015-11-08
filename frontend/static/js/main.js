@@ -1,6 +1,9 @@
 // Initialize Navbar
 var navView = new NavView();
-var loginView = new LoginView()
+var loginView = new LoginView();
+
+// Initiate footer
+var footerView = new footerView()
 
 FB.init({appId: '1705522486327956'})
 var user = new FacebookUser();
@@ -120,8 +123,6 @@ var AppRouter = Backbone.Router.extend({
   }
 
 });
-
-
 // Initiate the router
 var app_router = new AppRouter;
 Backbone.history.start()

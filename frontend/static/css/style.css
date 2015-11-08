@@ -5,6 +5,18 @@ body {
     color: white;
     overflow-x: hidden;
 }
+html, body {
+    height: 100%;
+}
+.wrapper {
+    min-height: 78.5%;
+    height: auto !important;
+    height: 60%;
+    margin: 0 auto 0em;
+}
+.push {
+    height: -40px;
+}
 
 .panel {
     background-color:#1A1A1A;
@@ -169,7 +181,7 @@ hr.star-primary:after {
     text-align: center
 }
 
-/*Player Profile*/
+/* Player Profile */
 .win { 
     color: #80FF80
 }
@@ -200,7 +212,7 @@ hr.star-primary:after {
     float:right
 }
 
-/*Landing Page */
+/* Landing Page */
 
 .features {
     height:330px;
@@ -217,10 +229,14 @@ header {
     margin-top: -20px;
 }
 
-header .container {
+header .segment {
     padding-top: 100px;
     padding-bottom: 50px;
     height: 600px;
+}
+
+header .banner {
+    height: 1000px;
 }
 
 header img {
@@ -394,6 +410,8 @@ form .row:first-child .floating-label-form-group {
     outline: 0;
 }
 
+/* Footer */
+
 footer {
     color: #fff;
 }
@@ -412,12 +430,14 @@ footer .footer-col {
 }
 
 footer .footer-below {
-    padding: 25px 0;
+    padding: 15px 0;
     background-color: #0D0D0D;
 }
 
 .footer_links{
+    padding-left: -.5em;
     text-align: left;
+    padding-top: .5em;
 }
 
 .footer_links li {
@@ -435,5 +455,7 @@ footer .footer-below {
 }
 
 .copyright {
+    padding-right: 1.5em;
     text-align: right;
+    padding-top: .5em;
 }

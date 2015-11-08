@@ -232,3 +232,21 @@ var LoginView = Backbone.View.extend({
     return this;
   }
 });
+
+var footerView = Backbone.View.extend({
+  el: '#footer',
+
+  initialize: function(){
+    this.render();
+  },
+
+  render: function(){
+    var footerPointer = this;
+    $.get('frontend/templates/footer.html', function(footerTemplate){
+      footerPointer.$el.html(footerTemplate);
+    });
+    return this;
+  },
+});
+
+
