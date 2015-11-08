@@ -9,13 +9,10 @@ html, body {
     height: 100%;
 }
 .wrapper {
-    min-height: 78.5%;
+    min-height: 100%;
     height: auto !important;
-    height: 60%;
-    margin: 0 auto 0em;
-}
-.push {
-    height: -40px;
+    height: 100%;
+    margin: 0 auto -5.5em;
 }
 
 .panel {
