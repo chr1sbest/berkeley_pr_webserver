@@ -1,18 +1,20 @@
 var gulp = require('gulp'),
-    uglify = require('gulp-uglify'),
-    plumber = require('gulp-plumber'),
-    browserSync = require('browser-sync');
+  concat = require('gulp-concat');
+  browserSync = require('browser-sync');
+  exec = require('child_process').exec;
 
 var reload = browserSync.reload;
-var exec = require('child_process').exec;
 
 //Run Flask server
-gulp.task('runserver', function() {
-    var proc = exec('python ../webserver.py');
+gulp.task('build', function() {
+  var proc = exec('python ../webserver.py');
+  return gulp.src(['static/js/views/*.js', 'static/js/*.js'])
+    .pipe(concat('all.js'))
+    .pipe(gulp.dest('static/js/'));
 });
 
 // Default task: Watch Files For Changes & Reload browser
-gulp.task('default', ['runserver'], function () {
+gulp.task('default', ['build'], function () {
   browserSync({
     notify: false,
     proxy: "127.0.0.1:5000"

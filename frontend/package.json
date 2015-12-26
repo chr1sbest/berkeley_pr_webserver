@@ -1,17 +1,17 @@
 {
-  "name": "workspace-gulpdemo",
+  "name": "bpr webserver",
   "version": "1.0.0",
-  "description": "$ npm install -g gulp $ cd myproj $ npm install gulp --save-dev",
+  "description": "",
   "main": "gulpfile.js",
   "dependencies": {
     "gulp": "^3.8.11",
-    "gulp-uglify": "^1.1.0"
   },
   "devDependencies": {
     "browser-sync": "^2.3.1",
     "gulp": "^3.8.11",
     "gulp-plumber": "^1.0.0",
     "gulp-uglify": "^1.1.0"
+    "gulp-concat": "^2.6.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
