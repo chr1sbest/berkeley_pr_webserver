@@ -7,7 +7,7 @@ var PlayerView = Backbone.View.extend({
   render:function(){
     var playerPointer = this;
     $.get('frontend/templates/players.html', function(playerTemplate){
-      var temp = Handlebars.compile(playerTemplate)
+      var temp = Handlebars.compile(playerTemplate);
       var compiled = temp(playerPointer.model.attributes);
       playerPointer.$el.html(compiled);
     });

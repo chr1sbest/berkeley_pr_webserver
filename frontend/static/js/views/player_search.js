@@ -24,18 +24,18 @@ var PlayerSearchView = Backbone.View.extend({
         threshold: 0.2,
         //keys: ["title","author.firstName"]
       };
-      searchPointer.fuseNames = new Fuse(names, fuseOptions)
+      searchPointer.fuseNames = new Fuse(names, fuseOptions);
 
       // Set event listener to watch input change
       $("#inputSearch").on('keyup', function() {
-        searchPointer.search()
+        searchPointer.search();
       });
 
       // HACK FIX THIS LATER
       // Set event listener to watch for button click
       $("#meButton").on("click", function(){
-        var id = FB.getUserID()
-        if (id == "") {
+        var id = FB.getUserID();
+        if (id === "") {
           alert("Please login with facebook (top-right)");
         } else {
           // If the user is logged in, direct them to the survey page.
@@ -43,7 +43,7 @@ var PlayerSearchView = Backbone.View.extend({
           var FBObject = user;
           var url_list = window.location.href.split('/');
           var url = url_list[url_list.length - 1];
-          var FBObject = {participant: url, id: id}
+          FBObject = {participant: url, id: id};
           alert('Please copy paste the following text into the survey.:\n\n\n' + JSON.stringify(FBObject));
 
           // Open new window to survey
@@ -71,9 +71,9 @@ var PlayerSearchView = Backbone.View.extend({
     // Build a list of player links
     var playersHTML = '<ul>';
     _.each(results, function(index) {
-      player = searchPointer.fuseNames.list[index]
+      player = searchPointer.fuseNames.list[index];
       playerHTML = '<li><a href="#players/' + player + '">' + player + '</a></li>';
-      playersHTML += playerHTML
+      playersHTML += playerHTML;
     });
     playersHTML += '</ul>';
 

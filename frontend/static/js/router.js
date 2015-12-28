@@ -21,10 +21,10 @@ var AppRouter = Backbone.Router.extend({
     // Fetch ranking data and update views accordingly
     currentRanks.fetch({
       success: function() {
-        rankingView.render()
+        rankingView.render();
       },
       error: function() {
-        rankingView.renderFailure()
+        rankingView.renderFailure();
       }
     });
   },
@@ -38,10 +38,10 @@ var AppRouter = Backbone.Router.extend({
     var playerView = new PlayerView({model: playerModel});
     playerModel.fetch({
       success: function() {
-        playerView.render()
+        playerView.render();
       },
       error: function() {
-        playerView.renderFailure()
+        playerView.renderFailure();
       }
     });
   },
@@ -52,13 +52,13 @@ var AppRouter = Backbone.Router.extend({
 
     // Initialize search view
     var searchModel = new AllPlayers();
-    var searchView = new PlayerSearchView({model: searchModel})
+    var searchView = new PlayerSearchView({model: searchModel});
     searchModel.fetch({
       success: function() {
-        searchView.render()
+        searchView.render();
       },
       error: function() {
-        searchView.renderFailure()
+        searchView.renderFailure();
       }
     });
   },
@@ -67,9 +67,9 @@ var AppRouter = Backbone.Router.extend({
     user.login(function(response){
       FB.api('/me', function(response) {
         if (response && !response.error) {
-          loginView.renderLoggedIn(response.name)
+          loginView.renderLoggedIn(response.name);
         } else {
-          app_router.navigate('/noop')
+          app_router.navigate('/noop');
         }
       });
     });
@@ -79,7 +79,7 @@ var AppRouter = Backbone.Router.extend({
     FB.getLoginStatus(function(response) {
       if (response && response.status === 'connected') {
         FB.logout(function(response) {
-            loginView.render()
+            loginView.render();
         });
       }
     });
@@ -97,5 +97,5 @@ var AppRouter = Backbone.Router.extend({
 
 
 // Initialize the router
-var app_router = new AppRouter;
-Backbone.history.start()
+var app_router = new AppRouter();
+Backbone.history.start();

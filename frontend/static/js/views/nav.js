@@ -13,7 +13,7 @@ var NavView = Backbone.View.extend({
       navPointer.$el.html(navbarTemplate);
       // Additionally, after successfully loading the navbar template,
       // we will also render the loginView portion of the navbar
-      loginView.render()
+      loginView.render();
     });
     return this;
   },

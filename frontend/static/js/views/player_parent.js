@@ -2,9 +2,11 @@ var PlayersParentView = Backbone.View.extend({
   el: '#container',
 
   initialize: function(){
-    this.render()
+    this.render();
   },
 
+  //Allow mulistring to pass Linter
+  /*jshint multistr: true */
   render: function(){
     var playersParent = '\
     <div class="panel panel-default">\

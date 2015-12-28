@@ -2,7 +2,7 @@ var HomeView = Backbone.View.extend({
   el: '#container',
 
   initialize: function(){
-    this.render()
+    this.render();
   },
 
   render: function(){

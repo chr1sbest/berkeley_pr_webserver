@@ -4,7 +4,7 @@ var LoginView = Backbone.View.extend({
 
   render: function(){
     var loginpointer = this;
-    this.setElement('#login')
+    this.setElement('#login');
     $.get('frontend/templates/logged_out.html', function(logout){
       loginpointer.$el.html(logout);
     });
@@ -13,8 +13,8 @@ var LoginView = Backbone.View.extend({
 
   renderLoggedIn: function(name){
     var loginpointer = this;
-    this.setElement('#login')
-    var name = name;
+    this.setElement('#login');
+    name = name;
     $.get('frontend/templates/logged_in.html', function(loggedInTemplate){
       var template = Handlebars.compile(loggedInTemplate);
       var compiledHtml = template({name: name});

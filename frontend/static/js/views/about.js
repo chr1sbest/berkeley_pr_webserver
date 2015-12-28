@@ -2,7 +2,7 @@ var AboutView = Backbone.View.extend({
   el: '#container',
 
   initialize: function(){
-    this.render()
+    this.render();
   },
 
   render: function(){

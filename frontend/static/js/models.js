@@ -5,7 +5,7 @@ var Rankings = Backbone.Model.extend({
 
 var Players = Backbone.Model.extend({
   url: function() {
-    return '/players/' + this.id
+    return '/players/' + this.id;
   },
 });
 

@@ -2,7 +2,7 @@ var AboutView = Backbone.View.extend({
   el: '#container',
 
   initialize: function(){
-    this.render()
+    this.render();
   },
 
   render: function(){
@@ -18,7 +18,7 @@ var HomeView = Backbone.View.extend({
   el: '#container',
 
   initialize: function(){
-    this.render()
+    this.render();
   },
 
   render: function(){
@@ -37,7 +37,7 @@ var LoginView = Backbone.View.extend({
 
   render: function(){
     var loginpointer = this;
-    this.setElement('#login')
+    this.setElement('#login');
     $.get('frontend/templates/logged_out.html', function(logout){
       loginpointer.$el.html(logout);
     });
@@ -46,8 +46,8 @@ var LoginView = Backbone.View.extend({
 
   renderLoggedIn: function(name){
     var loginpointer = this;
-    this.setElement('#login')
-    var name = name;
+    this.setElement('#login');
+    name = name;
     $.get('frontend/templates/logged_in.html', function(loggedInTemplate){
       var template = Handlebars.compile(loggedInTemplate);
       var compiledHtml = template({name: name});
@@ -72,7 +72,7 @@ var NavView = Backbone.View.extend({
       navPointer.$el.html(navbarTemplate);
       // Additionally, after successfully loading the navbar template,
       // we will also render the loginView portion of the navbar
-      loginView.render()
+      loginView.render();
     });
     return this;
   },
@@ -88,7 +88,7 @@ var PlayerView = Backbone.View.extend({
   render:function(){
     var playerPointer = this;
     $.get('frontend/templates/players.html', function(playerTemplate){
-      var temp = Handlebars.compile(playerTemplate)
+      var temp = Handlebars.compile(playerTemplate);
       var compiled = temp(playerPointer.model.attributes);
       playerPointer.$el.html(compiled);
     });
@@ -112,9 +112,11 @@ var PlayersParentView = Backbone.View.extend({
   el: '#container',
 
   initialize: function(){
-    this.render()
+    this.render();
   },
 
+  //Allow mulistring to pass Linter
+  /*jshint multistr: true */
   render: function(){
     var playersParent = '\
     <div class="panel panel-default">\
@@ -154,18 +156,18 @@ var PlayerSearchView = Backbone.View.extend({
         threshold: 0.2,
         //keys: ["title","author.firstName"]
       };
-      searchPointer.fuseNames = new Fuse(names, fuseOptions)
+      searchPointer.fuseNames = new Fuse(names, fuseOptions);
 
       // Set event listener to watch input change
       $("#inputSearch").on('keyup', function() {
-        searchPointer.search()
+        searchPointer.search();
       });
 
       // HACK FIX THIS LATER
       // Set event listener to watch for button click
       $("#meButton").on("click", function(){
-        var id = FB.getUserID()
-        if (id == "") {
+        var id = FB.getUserID();
+        if (id === "") {
           alert("Please login with facebook (top-right)");
         } else {
           // If the user is logged in, direct them to the survey page.
@@ -173,7 +175,7 @@ var PlayerSearchView = Backbone.View.extend({
           var FBObject = user;
           var url_list = window.location.href.split('/');
           var url = url_list[url_list.length - 1];
-          var FBObject = {participant: url, id: id}
+          FBObject = {participant: url, id: id};
           alert('Please copy paste the following text into the survey.:\n\n\n' + JSON.stringify(FBObject));
 
           // Open new window to survey
@@ -201,9 +203,9 @@ var PlayerSearchView = Backbone.View.extend({
     // Build a list of player links
     var playersHTML = '<ul>';
     _.each(results, function(index) {
-      player = searchPointer.fuseNames.list[index]
+      player = searchPointer.fuseNames.list[index];
       playerHTML = '<li><a href="#players/' + player + '">' + player + '</a></li>';
-      playersHTML += playerHTML
+      playersHTML += playerHTML;
     });
     playersHTML += '</ul>';
 
@@ -242,10 +244,10 @@ var RankingView = Backbone.View.extend({
 
 // Initialize navbar with login view
 var navView = new NavView();
-var loginView = new LoginView()
+var loginView = new LoginView();
 
 // Initialize facebook app
-FB.init({appId: '1705522486327956'})
+FB.init({appId: '1705522486327956'});
 var user = new FacebookUser();
 
 var AppRouter = Backbone.Router.extend({
@@ -271,10 +273,10 @@ var AppRouter = Backbone.Router.extend({
     // Fetch ranking data and update views accordingly
     currentRanks.fetch({
       success: function() {
-        rankingView.render()
+        rankingView.render();
       },
       error: function() {
-        rankingView.renderFailure()
+        rankingView.renderFailure();
       }
     });
   },
@@ -288,10 +290,10 @@ var AppRouter = Backbone.Router.extend({
     var playerView = new PlayerView({model: playerModel});
     playerModel.fetch({
       success: function() {
-        playerView.render()
+        playerView.render();
       },
       error: function() {
-        playerView.renderFailure()
+        playerView.renderFailure();
       }
     });
   },
@@ -302,13 +304,13 @@ var AppRouter = Backbone.Router.extend({
 
     // Initialize search view
     var searchModel = new AllPlayers();
-    var searchView = new PlayerSearchView({model: searchModel})
+    var searchView = new PlayerSearchView({model: searchModel});
     searchModel.fetch({
       success: function() {
-        searchView.render()
+        searchView.render();
       },
       error: function() {
-        searchView.renderFailure()
+        searchView.renderFailure();
       }
     });
   },
@@ -317,9 +319,9 @@ var AppRouter = Backbone.Router.extend({
     user.login(function(response){
       FB.api('/me', function(response) {
         if (response && !response.error) {
-          loginView.renderLoggedIn(response.name)
+          loginView.renderLoggedIn(response.name);
         } else {
-          app_router.navigate('/noop')
+          app_router.navigate('/noop');
         }
       });
     });
@@ -329,7 +331,7 @@ var AppRouter = Backbone.Router.extend({
     FB.getLoginStatus(function(response) {
       if (response && response.status === 'connected') {
         FB.logout(function(response) {
-            loginView.render()
+            loginView.render();
         });
       }
     });
@@ -347,8 +349,8 @@ var AppRouter = Backbone.Router.extend({
 
 
 // Initialize the router
-var app_router = new AppRouter;
-Backbone.history.start()
+var app_router = new AppRouter();
+Backbone.history.start();
 
 var Rankings = Backbone.Model.extend({
   url: '/rankings'
@@ -357,7 +359,7 @@ var Rankings = Backbone.Model.extend({
 
 var Players = Backbone.Model.extend({
   url: function() {
-    return '/players/' + this.id
+    return '/players/' + this.id;
   },
 });
 
@@ -371,51 +373,52 @@ Handlebars.registerHelper('list', function(items, options) {
   var top_rating = items[0].rating;
   var cutoff = 0;
   for(var i=0 ;items[i].rating > 0; i++) {
-      cutoff += 1
+      cutoff += 1;
   }
-  for(var i=0, l=items.length; i<l; i++) {
+  for(i=0, l=items.length; i<l; i++) {
     var item = items[i];
     var ranking = i + 1;	    
     // PLACEHOLDER, NEED PLAYER'S MAINS FOR STOCK ICONS
-    var icon = "<img src = 'frontend/static/images/stock_icons/Sandbag.png' alt= '' class = 'img_responsive'> "
+    var icon = "<img src = 'frontend/static/images/stock_icons/Sandbag.png' alt= '' class = 'img_responsive'> ";
     // PLACEHOLDER, EXAMPLE CODE TO GET PROPER STOCK ICON
     //var icon = "<img src = 'frontend/static/images/stock_icons/neutral " + items.character + "' alt= '' class = 'img_responsive'> "
     var player = item.player;    
     // PLACEHOLDER, NEED TO HAVE W/L RECORD PULLED PER PLAYER
-    var record = "30/30"
+    var record = "30/30";
     // RATING OUT OF 100, NEGATIVE RATING BECOMES 0
-    var rating = Math.round(item.rating/top_rating * 100000) / 1000/*toString().substring(0,6);*/
+    var rating = Math.round(item.rating/top_rating * 100000) / 1000/*toString().substring(0,6);*/;
     if (rating < 0){
-      rating = 0
+      rating = 0;
     }
     // PLACEHOLDER, DETERMINE LEAGUE BASED ON PERCENTAGE, NONE IF RATING = 0
-    var lim_master = 4
-    var lim_diamond = .17
-    var lim_plat = .29
-    var lim_gold = .45
-    var lim_silver = .67
+    var league;
+    var lim_master = 4;
+    var lim_diamond = 0.17;
+    var lim_plat = 0.29;
+    var lim_gold = 0.45;
+    var lim_silver = 0.67;
     if (ranking < lim_master){
-      var league = "master"
+      league = "master";
     }
     else if (ranking/cutoff < lim_diamond) {
-      var league = "diamond"
+      league = "diamond";
     }
     else if (ranking/cutoff < lim_plat) {
-      var league = "plat"
+      league = "plat";
     }
     else if (ranking/cutoff < lim_gold) {
-      var league = "gold"
+      league = "gold";
     }
     else if (ranking/cutoff < lim_silver) {
-      var league = "silver"
+      league = "silver";
     }
     else if (ranking <= cutoff) {
-      var league = "bronze"
+      league = "bronze";
     }
     else {
-      var league = "unranked"
+      league = "unranked";
     }
-    var out = out + "<tr>" + "<td>" + ranking + "</td>" + "<td>" + icon + "</td>" + "<td>" + player + "</td>" + "<td>" + record + "</td>" + "<td>" + rating + "</td>" + "<td>" + "<img src='frontend/static/images/leagues/" + league + ".png' alt='' style='img_responsive'>"+ "</td>" + "</tr>";
+    out = out + "<tr>" + "<td>" + ranking + "</td>" + "<td>" + icon + "</td>" + "<td>" + player + "</td>" + "<td>" + record + "</td>" + "<td>" + rating + "</td>" + "<td>" + "<img src='frontend/static/images/leagues/" + league + ".png' alt='' style='img_responsive'>"+ "</td>" + "</tr>";
   }
   return out;
 });
@@ -424,20 +427,20 @@ Handlebars.registerHelper('playerMatches', function(items, options) {
   console.log(items);
   var out = '';
   var player_data  = items.data.root;
-  var matches = player_data['matches'];
+  var matches = player_data.matches;
   _.each(matches, function(match){
     var date = '10/15/2015';
-    var opp = match['opp'];
+    var opp = match.opp;
 
     // CHANGE THIS LATER CHARLES
-    var outcome = match['outcome'];
+    var outcome = match.outcome;
     if (outcome == "lose"){
       outcome = "loss";
     }
 
-    var tournament = match['tournament'];
+    var tournament = match.tournament;
     out = out + "<tr class='" + outcome + "'>" + "<td>" + date + "</td>" + "<td><a href='/#players/" + opp + "'>" + opp + "</a></td>" + "<td>" + outcome + "</td>" + "<td>" + tournament + "<td>" + "</tr>";
 
   });
-  return out
+  return out;
 });
