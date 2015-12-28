@@ -2,11 +2,19 @@ var gulp = require('gulp'),
   concat = require('gulp-concat'),
   uglify = require('gulp-uglify'),
   rename = require('gulp-rename'),
-  fixmyjs = require("gulp-fixmyjs"),
+  jshint = require("gulp-jshint"),
   minify_css = require('gulp-minify-css'),
   browser_sync = require('browser-sync'),
   exec = require('child_process').exec,
   reload = browser_sync.reload;
+
+var all_javascript = [
+  'static/js/views/*.js',
+  'static/js/main.js',
+  'static/js/router.js',
+  'static/js/models.js',
+  'static/js/templates.js'
+]
 
 // Run flask server
 gulp.task('runserver', function() {
@@ -15,15 +23,7 @@ gulp.task('runserver', function() {
 
 // Build all.js and all.min.js
 gulp.task('build-js', function(){
-  var all_javascript = [
-    'static/js/views/*.js',
-    'static/js/main.js',
-    'static/js/router.js',
-    'static/js/models.js',
-    'static/js/templates.js'
-  ]
   return gulp.src(all_javascript)
-    .pipe(fixmyjs())  // Fix common lint errors
     .pipe(concat('all.js'))
     .pipe(gulp.dest('static/js/'))
     .pipe(uglify())   // Minify
@@ -39,8 +39,15 @@ gulp.task('minify-css', function(){
     .pipe(gulp.dest('dist'));
 });
 
+// Lint JS
+gulp.task('lint', function(){
+  return gulp.src(all_javascript)
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
 // Watch files, build accordingly, and reload browser.
-gulp.task('default', ['build-js', 'minify-css', 'runserver'], function () {
+gulp.task('default', ['lint', 'build-js', 'minify-css', 'runserver'], function () {
   // Build CSS
   gulp.watch('static/css/*', function(){
     gulp.run('minify-css');
