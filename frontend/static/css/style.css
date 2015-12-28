@@ -204,7 +204,7 @@ hr.star-primary:after {
 header {
     text-align: center;
     color: #fff;
-    background:url(../images/1_PokemonStadium.png);
+    background:url(../static/images/1_PokemonStadium.png);
     background-repeat: no-repeat;
     background-size: cover;
     margin-top: -20px;
