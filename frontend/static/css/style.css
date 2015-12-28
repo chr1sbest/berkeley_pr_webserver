@@ -201,27 +201,23 @@ hr.star-primary:after {
     width:100%;
 }
 
-header {
-    text-align: center;
+#legend-header {
     color: #fff;
     background:url(../static/images/1_PokemonStadium.png);
     background-repeat: no-repeat;
     background-size: cover;
     margin-top: -20px;
-}
-
-header .container {
     padding-top: 100px;
     padding-bottom: 50px;
     height: 600px;
 }
 
-header img {
+#legend-header img {
     display: block;
     margin: 0 auto 20px;
 }
 
-header .intro-text .name {
+#legend-header .intro-text .name {
     display: block;
     text-transform: uppercase;
     font-size: 4em;
@@ -229,31 +225,29 @@ header .intro-text .name {
     margin-bottom: 0em;
 }
 
-header .intro-text .skills {
+#legend-header .intro-text .skills {
     font-size: 1.25em;
     text-transform: uppercase;
     font-weight: 300;
     margin-top: 0em;
 }
-section {
+
+.success {
     padding: 100px 0;
-}
-
-section h2 {
-    margin: 0;
-    font-size: 3em;
-}
-
-section.success {
     color: #fff;
     background: #14293D;
 }
 
-section.success a,
-section.success a:hover,
-section.success a:focus,
-section.success a:active,
-section.success a.active {
+.success h2 {
+    margin: 0;
+    font-size: 3em;
+}
+
+.success a,
+.success a:hover,
+.success a:focus,
+.success a:active,
+.success a.active {
     outline: 0;
     color: #2c3e50;
 }
