@@ -16,10 +16,20 @@ def index():
 
 @application.route("/rankings")
 def rankings():
-    path = os.path.join(CURRENT_DIR, 'data_processing/mock_data/ranking_mock.json')
+    """ Return raw json from file. """
+    path = os.path.join(CURRENT_DIR, 'data_processing/data/current_rankings.json')
     with open(path, 'r') as data:
         ranking_data = json.load(data)
     return Response(json.dumps(ranking_data),
+                    mimetype='application/json')
+
+@application.route("/players")
+def all_players():
+    """ Return raw json from file. """
+    path = os.path.join(CURRENT_DIR, 'data_processing/data/all_players.json')
+    with open(path, 'r') as data:
+        player_data = json.load(data)
+    return Response(json.dumps(player_data),
                     mimetype='application/json')
 
 @application.route("/players/<player_id>")
@@ -29,14 +39,6 @@ def player(player_id):
     with open(path, 'r') as data:
         player_data = json.load(data)
     return jsonify(**player_data)
-
-@application.route("/players")
-def all_players():
-    path = os.path.join(CURRENT_DIR, 'data_processing/mock_data/all_players.json')
-    with open(path, 'r') as data:
-        player_data = json.load(data)
-    return Response(json.dumps(player_data),
-                    mimetype='application/json')
 
 if __name__ == "__main__":
     application.run()

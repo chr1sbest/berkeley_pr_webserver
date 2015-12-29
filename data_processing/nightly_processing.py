@@ -110,7 +110,7 @@ def build_user_matches_list(tournament, player_matches):
 
 
 def update_rankings(ratings_map,
-                    output_file='data/current_rankings.json', user_collection=None):
+                    outfile='data/current_rankings.json', user_collection=None):
     """ Build a list of rankings with the global ratings map. Update each
     player in Mongo with their respective ranking and output the global ranking
     list to a json_file. """
@@ -125,9 +125,17 @@ def update_rankings(ratings_map,
             update_command = {'$set': {'rank': rank, 'rating': rating.mu}}
             user_collection.update_one({'facebook_id': fb_id}, update_command)
 
-    with open(output_file, 'w') as ranking_file:
+    with open(outfile, 'w') as ranking_file:
         ranking_file.write(json.dumps(rankings))
     return rankings
+
+
+def build_all_players_list(ratings_map, outfile='data/all_players.json'):
+    """ Build a list of all players and output to a json file."""
+    all_players = [x for x in ratings_map.keys()]
+    with open(outfile, 'w') as all_players_file:
+        all_players_file.write(json.dumps(all_players))
+    return all_players
 
 
 def main():
@@ -166,6 +174,9 @@ def main():
 
     # Update rankings for each user record and write rankings to json file
     update_rankings(ratings_map, user_collection=user_collection)
+
+    # Build a list of all players and store in json file
+    build_all_players_list(ratings_map)
 
 
 if __name__ == '__main__':

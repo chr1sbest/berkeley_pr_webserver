@@ -1,6 +1,7 @@
-data_processing/config.py
 *.pyc
 node_modules
 .ctrlpignore
 frontend/static/js/all.js
 frontend/dist/*
+data_processing/config.py
+data_processing/data
