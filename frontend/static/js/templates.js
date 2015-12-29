@@ -59,17 +59,20 @@ Handlebars.registerHelper('playerMatches', function(items, options) {
   var player_data  = items.data.root;
   var matches = player_data.matches;
   _.each(matches, function(match){
-    var date = '10/15/2015';
-    var opp = match.opp;
+    var date = match.created_at;
+    var winner = match.winner_id;
+    var loser = match.loser_id;
+    var score = match.scores_csv;
+    var tournament = match.tournament_id;
+    var outcome;
 
-    // CHANGE THIS LATER CHARLES
-    var outcome = match.outcome;
-    if (outcome == "lose"){
+    if (player_data.id == winner){
+      outcome = "win";
+    } else {
       outcome = "loss";
     }
 
-    var tournament = match.tournament;
-    out = out + "<tr class='" + outcome + "'>" + "<td>" + date + "</td>" + "<td><a href='/#players/" + opp + "'>" + opp + "</a></td>" + "<td>" + outcome + "</td>" + "<td>" + tournament + "<td>" + "</tr>";
+    out = out + "<tr class='" + outcome + "'>" + "<td>" + date + "</td>" + "<td><a href='/#players/" + winner + "'>" + winner + "</a></td>" + "<td>" + outcome + "</td>" + "<td>" + tournament + "<td>" + "</tr>";
 
   });
   return out;
