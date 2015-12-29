@@ -1,11 +1,14 @@
 import os
 import json
 from flask import Flask, Response, jsonify, render_template
+from flask.ext.pymongo import PyMongo
 
 # Initialize flask application
 application = Flask(__name__,
                     template_folder='frontend',
                     static_folder='frontend')
+application.config['MONGO_DBNAME'] = 'production'
+mongo = PyMongo(application)
 
 # Determine `pwd` of this executing file
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -34,11 +37,15 @@ def all_players():
 
 @application.route("/players/<player_id>")
 def player(player_id):
-    path = os.path.join(CURRENT_DIR,
-                        "data_processing/mock_data/player_{}_mock.json".format(player_id))
-    with open(path, 'r') as data:
-        player_data = json.load(data)
-    return jsonify(**player_data)
+    data = mongo.db.users.find_one_or_404({'tag':player_id})
+    matches = data['matches']
+    player_data = {
+        'matches': matches,
+        'rank': data['rank'],
+        'id': data['tag']
+    }
+    return Response(json.dumps(player_data),
+                    mimetype='application/json')
 
 if __name__ == "__main__":
     application.run()

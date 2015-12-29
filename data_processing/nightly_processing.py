@@ -54,8 +54,10 @@ def update_registered_user_matches(tournaments, user):
     """ Iterate over each user and the tourneys they have participated in so
     that we can update info on those tournament matches to reflect this user's
     facebook id. """
+    if not user.get('facebook_id'):
+        return
     fb_id = user['facebook_id']
-    for participant_record in user['participated_as']:
+    for participant_record in user.get('participated_as', []):
         name = participant_record['name']
         tournament_id = participant_record['tournament_id']
         tourney = tournaments[tournament_id]
@@ -100,12 +102,8 @@ def build_user_matches_list(tournament, player_matches):
     """ Build list of matches for each user."""
     for match in tournament['matches']:
         winner, loser = match['match']['winner_id'], match['match']['loser_id']
-        # If the participants of the match have facebook_ids (string) then we
-        # will add their match to their list of matches.
-        if isinstance(winner, unicode):
-            player_matches[winner].append(match['match'])
-        if isinstance(loser, unicode):
-            player_matches[loser].append(match['match'])
+        player_matches[winner].append(match['match'])
+        player_matches[loser].append(match['match'])
     return player_matches
 
 
@@ -123,7 +121,9 @@ def update_rankings(ratings_map,
         # Update user data with new rank and rating
         if user_collection:
             update_command = {'$set': {'rank': rank, 'rating': rating.mu}}
-            user_collection.update_one({'facebook_id': fb_id}, update_command)
+            user_collection.update_one({'tag': fb_id},
+                                       update_command,
+                                       upsert=True)
 
     with open(outfile, 'w') as ranking_file:
         ranking_file.write(json.dumps(rankings))
@@ -168,9 +168,10 @@ def main():
     player_matches = defaultdict(list)
     for tournament in ordered_tournaments:
         build_user_matches_list(tournament, player_matches)
-    for fb_id, matches in player_matches.items():
-        user_collection.update_one({'facebook_id': fb_id},
-                                   {'$set': {'matches': matches}})
+    for tag, matches in player_matches.items():
+        user_collection.update_one({'tag': tag},
+                                   {'$set': {'matches': matches}},
+                                   upsert=True)
 
     # Update rankings for each user record and write rankings to json file
     update_rankings(ratings_map, user_collection=user_collection)
