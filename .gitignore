@@ -1,3 +1,4 @@
+data_processing/config.py
 *.pyc
 node_modules
 .ctrlpignore
