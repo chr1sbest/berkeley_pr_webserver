@@ -73,6 +73,11 @@ var NavView = Backbone.View.extend({
       // Additionally, after successfully loading the navbar template,
       // we will also render the loginView portion of the navbar
       loginView.render();
+
+      // Hide collapsed navbar when clicking link (for mobile users)
+      $(".navbar-nav").on("click", function() {
+        $(".navbar-collapse").collapse('hide');
+      });
     });
     return this;
   },
