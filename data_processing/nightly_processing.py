@@ -39,8 +39,7 @@ def update_all_tournament_matches(tournament):
     id_to_name = {}
     for player in tournament['players']:
         player_details = player['participant']
-        id_to_name[player_details['id']] = \
-            player_details['display_name_with_invitation_email_address']
+        id_to_name[player_details['id']] = player_details['display_name_with_invitation_email_address']
 
     # Update winner and loser id to player_name from player_id
     for match_object in tournament['matches']:
