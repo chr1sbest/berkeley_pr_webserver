@@ -7,6 +7,7 @@ from config import CHALLONGE_KEY
 
 CLIENT = pymongo.MongoClient()
 
+#TODO: Remove unneccesary data, include link to challonge page and tourney name to each match in matches
 def get_tournament_data(tournament_id):
     """ Query challonge API for player and match details.
 
@@ -19,13 +20,19 @@ def get_tournament_data(tournament_id):
     players = get(url.format(tournament_id, 'participants'), params=params)
 
     return {
-        'players': players,
-        'matches': matches,
+        #TODO regex to only get name/id for player and winner/loser id for matches
+        'players': players.json(),
+        'matches': matches.json(),
         'tournament_id': tournament_id,
-        'created_at': players[-1]['created_at']
+        'created_at': players.json()[-1]['participant']['created_at']
     }
 
 def upload_tournament_data(data, client=CLIENT):
     """ Insert tournament data into Mongo."""
     tournaments_collection = client['production']['tournaments']
     tournaments_collection.insert(data)
+
+def upload_test_data(data, client=CLIENT):
+    """ Upload test data into test db for testing purposes."""
+    test_collection = client['test']['tournaments']
+    test_collection.insert(data)
