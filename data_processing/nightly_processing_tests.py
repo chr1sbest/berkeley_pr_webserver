@@ -74,13 +74,5 @@ class TestNightlyProcessing(unittest.TestCase):
             isEq = match['winner_id'] == 31900059 or match['loser_id'] == 31900059
             self.assertTrue(isEq)
 
-        
-
-
-
-        
-
-        
-
 if __name__ == '__main__':
     unittest.main()

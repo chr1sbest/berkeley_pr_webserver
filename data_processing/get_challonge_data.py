@@ -20,6 +20,7 @@ def get_tournament_data(tournament_id):
     players = get(url.format(tournament_id, 'participants'), params=params)
 
     return {
+        #TODO regex to only get name/id for player and winner/loser id for matches
         'players': players.json(),
         'matches': matches.json(),
         'tournament_id': tournament_id,
